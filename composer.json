@@ -1,6 +1,7 @@
 {
     "name": "pasindu/Ideamart",
-    "autoload": {
-        "psr-4": {"pasindu\\Ideamart\\":"src"}
+    "autoload": 
+    {
+         "classmap": ["vendor/pasindu/Ideamart/src/Idemart/SMS/Receiver.php"]	
     }
 }
