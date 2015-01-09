@@ -17,17 +17,42 @@ class Receiver
     private $requestId;
     private $encoding;
     private $thejson;
-    
-    public function __construct($jsonRequest)
+
+    public function __construct()
     {
-        $jsonRequest = json_decode(file_get_contents('php://input'));
-        
+        if (file_get_contents("php://input")) {
+            $res = $this->handRequest(file_get_contents("php://input"));
+            header('Content-type: application/json');
+            echo $res; 
+        }
+    }
+    
+    public function handRequest($jsonRequest)
+    {
+        $jsonRequest =json_decode($jsonRequest,true);
+        $response = $this->makeResponse($jsonRequest);
+    }
+
+    public function makeResponse($jsonRequest)
+    {
         if (!((isset($jsonRequest->sourceAddress) && isset($jsonRequest->message)))) {
             $response = array(
                 'statusCode' => 'E1312',
                 'statusDetail' => 'Request is Invalid.'
             );
         } else {
+     
+            $response = array(
+                'statusCode' => 'S1000',
+                'statusDetail' => 'Process completed successfully.'
+            );
+            $this->setUpReceiver($jsonRequest);
+        }
+        return $response;
+    }
+
+    public function setUpReceiver($jsonRequest)
+    {
             $this->thejson       = $jsonRequest;
             $this->version       = $jsonRequest->version;
             $this->applicationId = $jsonRequest->applicationId;
@@ -35,17 +60,8 @@ class Receiver
             $this->message       = $jsonRequest->message;
             $this->requestId     = $jsonRequest->requestId;
             $this->encoding      = $jsonRequest->encoding;
-            
-            $response = array(
-                'statusCode' => 'S1000',
-                'statusDetail' => 'Process completed successfully.'
-            );
-        }
-        
-        header('Content-type: application/json');
-        echo json_encode($response);
     }
-    
+
     // Get the version of the incomming message
     public function getVersion()
     {
