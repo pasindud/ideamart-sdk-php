@@ -1,6 +1,6 @@
 {
     "name": "pasindu/Ideamart",
     "autoload": {
-          "classmap": ["vendor/pasindu/Ideamart/src/"]
-  }
+        "psr-4": {"pasindu\\Ideamart\\":"src"}
+    }
 }
