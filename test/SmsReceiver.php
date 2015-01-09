@@ -1,7 +1,6 @@
 <?php
 
-
-require "../src/SMS/Receiver.php";
+require "../vendor/autoload.php";
 
 class ClassName extends PHPUnit_Framework_TestCase
 {
@@ -17,10 +16,10 @@ class ClassName extends PHPUnit_Framework_TestCase
     $jsonRequest->encoding = "text";
     return $jsonRequest;
   }
-  
+
   public function testSmsReceiverObjSetters()
   {
-    $rec = new Receiver();
+    $rec = new SMSReceiver();
     $rec->setUpReceiver($this->sampleIdeamartSms());
     $this->assertEquals($rec->getVersion(), "1");
     $this->assertEquals($rec->getApplicationId(), "APP_0001");
@@ -32,7 +31,7 @@ class ClassName extends PHPUnit_Framework_TestCase
 
   public function testSmsReceiverMakeRequest()
   {
-    $rec = new Receiver();
+    $rec = new SMSReceiver();
 
     $json = $this->sampleIdeamartSms();
     $res = $rec->makeResponse($json);
@@ -41,7 +40,6 @@ class ClassName extends PHPUnit_Framework_TestCase
     $this->assertEquals($res["statusCode"], 'S1000');
 
     unset($json->sourceAddress);
-
 
     $res = $rec->makeResponse($json);
 

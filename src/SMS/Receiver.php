@@ -8,7 +8,8 @@
 * Ideamart SMS Receiver Class
 */
 
-class Receiver
+
+class SMSReceiver
 {
     private $version;
     private $applicationId;

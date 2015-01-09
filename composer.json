@@ -1,7 +1,10 @@
 {
     "name": "pasindu/ideamart",
+    "require":{
+       "monolog/monolog": "1.12.0"
+    },
     "autoload": 
     {
-         "classmap": ["src/SMS/Receiver.php"]  
+         "classmap": ["src/Core/IdeamartCore.php","src/Core/IdeamartExceptions.php","src/SMS/"]  
     }
 }
