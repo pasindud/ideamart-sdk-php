@@ -1,7 +1,5 @@
 <?php
 
-namespace Ideamart\SMS;
-
 /**
 * Author : Pasindu De Silva
 * Licence : MIT License
