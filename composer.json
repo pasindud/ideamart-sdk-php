@@ -1,5 +1,5 @@
 {
-    "name": "pasindu/Ideamart",
+    "name": "pasindu/ideamart",
     "autoload": 
     {
          "classmap": ["src/Ideamart/SMS/Receiver.php"]	
