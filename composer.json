@@ -1,0 +1,8 @@
+{
+    "name": "pasindu/ideamart",
+    "autoload": {
+        "psr-0" : {
+            "Ideamart\\SMS" : "src"
+        }
+    }
+}
