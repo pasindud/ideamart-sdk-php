@@ -1,5 +1,4 @@
 <?php
-
 /**
 * Author : Pasindu De Silva
 * Licence : MIT License
@@ -20,18 +19,17 @@ class SMSReceiver
     private $thejson;
 
     public function __construct()
-    {
-        if (file_get_contents("php://input")) {
-            $res = $this->handRequest(file_get_contents("php://input"));
+    {   
+            $payload =file_get_contents("php://input");
+            $res = $this->handRequest($payload);
             header('Content-type: application/json');
-            echo $res; 
-        }
+            echo json_encode($res);
     }
     
-    public function handRequest($jsonRequest)
+    public function handRequest($payload)
     {
-        $jsonRequest =json_decode($jsonRequest,true);
-        $response = $this->makeResponse($jsonRequest);
+        $jsonRequest =json_decode($payload);
+        return $response = $this->makeResponse($jsonRequest);
     }
 
     public function makeResponse($jsonRequest)

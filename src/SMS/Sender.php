@@ -4,7 +4,7 @@
 * Licence : MIT License
 * http://opensource.org/licenses/MIT
 * 
-* Ideamart SMS Receiver Class
+* Ideamart SMS Sender Class
 */
 
 class SMSSender extends IdeamartCore{

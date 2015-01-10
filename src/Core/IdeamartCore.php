@@ -1,15 +1,16 @@
 <?php
+/**
+* Author : Pasindu De Silva
+* Licence : MIT License
+* http://opensource.org/licenses/MIT
+* 
+* Ideamart Core Class
+*/
 
-// ==========================================
-// Ideamart : PHP SMS API Core Class
-// ==========================================
-// ==========================================
-// Author : Pasindu De Silva
-// Licence : MIT License
-// http://opensource.org/licenses/MIT
-// ==========================================
 
-// Makes this sole dependent on composer
+/**
+*   TODO Ability to drop this dependence and do custom loggin
+*/
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -31,6 +32,7 @@ class IdeamartCore
         $this->log_message("Core Response Url='".$url."' payload='".$res."'",'debug');
         return $res;
     }
+
 
     public $log_state = 1;
     public $log;

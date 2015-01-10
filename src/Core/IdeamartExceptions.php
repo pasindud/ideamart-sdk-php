@@ -1,11 +1,11 @@
 <?php
-// ==========================================
-// Ideamart : PHP SMS API Exception Class
-// ==========================================
-// Author : Pasindu De Silva
-// Licence : MIT License
-// http://opensource.org/licenses/MIT
-// ==========================================
+/**
+* Author : Pasindu De Silva
+* Licence : MIT License
+* http://opensource.org/licenses/MIT
+* 
+* Ideamart Exception Class
+*/
 
 class IdeamartExceptions extends Exception{
   private $statusCode,
