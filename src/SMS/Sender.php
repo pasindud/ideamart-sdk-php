@@ -8,14 +8,15 @@
 */
 
 class SMSSender extends IdeamartCore{
-  private $applicationId;
-  private $password;
-  private $encoding;
-  private $version;
-  private $deliveryStatusRequest;
-  private $binaryHeader;
-  private $sourceAddress;
-  private $serverURL;
+      private $applicationId;
+      private $password;
+      private $charging_amount;
+      private $encoding;
+      private $version;
+      private $deliveryStatusRequest;
+      private $binaryHeader;
+      private $sourceAddress;
+      private $server;
   
   /* Send the server name, app password and app id
   * Dialog Production Severurl : HTTPS : - https://api.dialog.lk/sms/send
@@ -29,20 +30,13 @@ class SMSSender extends IdeamartCore{
   }
 
   //  Setup SMSSender
-  public function setUp($serverURL,$applicationId,$password,$log_state,$log_file)
+  public function setup($serverURL,$applicationId,$password,$log_state,$log_file)
   {
     $this->applicationId = $applicationId;
     $this->password = $password;
     $this->serverURL = $serverURL;
     $this->logInit($log_state,$log_file);
   }
-  
-  // Broadcast a message to all the subcribed users
-  public function broadcast($message){
-    $this->log_message("Broadcast Message='".$message."'",'debug');
-    return $this->sms($message, array('tel:all'));
-  }
-  
   // Send a message to the user with a address or send the array of addresses
   public function sms($message, $addresses){
     if (!is_array($addresses)) {
@@ -58,8 +52,9 @@ class SMSSender extends IdeamartCore{
 
     $this->log_message("API SMS Reponse=".$res,'debug');
 
-    // Handle the api response
-    $res = $this->handleResponse($res);
+    // Handle the response
+    $res = $this->coreHandleResponse($res);
+
     return $res;
   }
 
@@ -101,26 +96,6 @@ class SMSSender extends IdeamartCore{
     $jsonStream = json_encode($applicationDetails+$messageDetails);
 
     return $jsonStream;
-  }
-
-
-  public function handleResponse($jsonResponse){
-
-    if (empty($jsonResponse)) {
-      throw new IdeamartExceptions("Incorrect Server Url check it again", 1); 
-    }
-
-    $jsonResponse = json_decode($jsonResponse);
-
-    $statusCode = $jsonResponse->statusCode;
-    $statusDetail = $jsonResponse->statusDetail;
-
-    if (trim($statusCode)=="S1000") {
-      return $jsonResponse;
-    }else{
-      throw new IdeamartExceptions($statusDetail,$statusCode); 
-    }
-    return false;
   }
 
   public function setapplicationId($applicationId){

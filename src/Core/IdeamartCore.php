@@ -34,6 +34,25 @@ class IdeamartCore
     }
 
 
+      public function coreHandleResponse($jsonResponse){
+
+        if (empty($jsonResponse)) {
+          throw new IdeamartExceptions("Incorrect Server Url check it again", 1); 
+        }
+
+        $jsonResponse = json_decode($jsonResponse);
+
+        $statusCode = $jsonResponse->statusCode;
+        $statusDetail = $jsonResponse->statusDetail;
+
+        if (trim($statusCode)=="S1000") {
+          return $jsonResponse;
+        }else{
+          throw new IdeamartExceptions($statusDetail,$statusCode); 
+        }
+        return false;
+      }
+      
     public $log_state = 1;
     public $log;
     public $log_file;
@@ -61,9 +80,12 @@ class IdeamartCore
 
     public function log_message($message,$type="debug")
     {
-        if ($this->log_state==1) {
-          $logFunName="add".ucfirst($type); // Make info to Info
-          $this->log->$logFunName($message);
-      }
-  }
+        if (isset($this->log)) {
+            if ($this->log_state==1) {
+              $logFunName="add".ucfirst($type);
+              $this->log->$logFunName($message);
+            }
+        }
+        error_log("[$type] ".$message);
+    }
 }

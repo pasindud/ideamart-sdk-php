@@ -4,18 +4,22 @@
 * Licence : MIT License
 * http://opensource.org/licenses/MIT
 * 
-* Ideamart SMS Receiver Class
+* Ideamart USSD Receiver Class
 */
 
-class SMSReceiver
+
+class USSDReceiver
 {
-    public $version;
-    public $applicationId;
-    public $sourceAddress;
-    public $message;
-    public $requestId;
-    public $encoding;
-    public $thejson;
+    private $sourceAddress; 
+    private $message;
+    private $requestId;
+    private $applicationId;
+    private $encoding;
+    private $version;
+    private $sessionId;
+    private $ussdOperation;
+    private $vlrAddress;
+    private $thejson;
 
     public function __construct()
     {   
@@ -58,48 +62,44 @@ class SMSReceiver
             $this->message       = $jsonRequest->message;
             $this->requestId     = $jsonRequest->requestId;
             $this->encoding      = $jsonRequest->encoding;
+            $this->sessionId     = $jsonRequest->sessionId;
+            $this->ussdOperation = $jsonRequest->ussdOperation;
     }
 
-    // Get the version of the incomming message
-    public function getVersion()
-    {
-        return $this->version;
-    }
-    
-    // Get the encoding of the incomming message
-    public function getEncoding()
-    {
-        return $this->encoding;
-    }
-    
-    // Get the Application of the incomming message
-    public function getApplicationId()
-    {
-        return $this->applicationId;
-    }
-    
-    // Get the address of the incomming message
-    public function getAddress()
-    {
-        return $this->sourceAddress;
-    }
-    
-    // Get the Message of the incomming request 
-    public function getMessage()
-    {
-        return $this->message;
-    }
-    
-    // Get the unique requestId of the incomming message  
-    public function getRequestId()
-    {
-        return $this->requestId;
-    }
-    
-    // Get the json
-    public function getJson()
-    {
+
+    public function getthejson(){
         return $this->thejson;
     }
-    
+
+    public function getAddress(){
+        return $this->sourceAddress;
+    }
+
+    public function getMessage(){
+        return $this->message;
+    }
+
+    public function getRequestID(){
+        return $this->requestId;
+    }
+
+    public function getApplicationId(){
+        return $this->applicationId;
+    }
+
+    public function getEncoding(){
+        return $this->encoding;
+    }
+
+    public function getVersion(){
+        return $this->version;
+    }
+
+    public function getSessionId(){
+        return $this->sessionId;
+    }
+
+    public function getUssdOperation(){
+        return $this->ussdOperation;
+    }
 }

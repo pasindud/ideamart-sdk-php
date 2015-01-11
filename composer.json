@@ -5,6 +5,6 @@
     },
     "autoload": 
     {
-         "classmap": ["src/Core/IdeamartCore.php","src/Core/IdeamartExceptions.php","src/SMS/"]  
+         "classmap": ["src/"]  
     }
 }
