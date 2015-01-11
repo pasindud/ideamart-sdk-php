@@ -23,16 +23,18 @@ class SMSSender extends IdeamartCore{
   */    
   public function __construct($serverURL=null, $applicationId=null, $password=null,$log_state=1,$log_file="ideamart.log")
   {
-    if(!(isset($serverURL, $applicationId, $password))){
-      throw new IdeamartExceptions('Server Url, App Id and Password are required',1);
-    } else {
-      $this->applicationId = $applicationId;
-      $this->password = $password;
-      $this->serverURL = $serverURL;
+    if((isset($serverURL, $applicationId, $password))){
+      $this->setUp($serverURL,$applicationId,$password,$log_state,$log_file);
     }
+  }
 
+  //  Setup SMSSender
+  public function setUp($serverURL,$applicationId,$password,$log_state,$log_file)
+  {
+    $this->applicationId = $applicationId;
+    $this->password = $password;
+    $this->serverURL = $serverURL;
     $this->logInit($log_state,$log_file);
-  
   }
   
   // Broadcast a message to all the subcribed users
